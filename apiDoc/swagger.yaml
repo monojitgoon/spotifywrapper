@@ -1,0 +1,176 @@
+swagger: '2.0'
+info:
+  description: This is the Swagger definition file for the SOA assignments of Group 6
+  version: 1.0.0
+  title: Swagger SOA
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: example@example.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: example.example.io
+basePath: /v2
+tags:
+  - name: artist
+schemes:
+  - http
+paths:
+  '/artist/{artistId}':
+    get:
+      tags:
+        - artist
+      summary: Get a single artist by its ID
+      description: ''
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: artistId
+          description: ID of artist to return
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Artist'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Artist not found
+  '/artist/{artistId}/topTracks':
+    get:
+      tags:
+        - artist
+      summary: Get a the top five tracks of an artist
+      description: ''
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: artistId
+          description: ID of artist
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Track'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Artist not found  
+  '/artist/{artistId}/similiarArtist':
+    post:
+      tags:
+        - artist
+      summary: Get a a similiar artist to the provided one (returns not always the same) 
+      description: ''
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: artistId
+          description: ID of artist
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+              $ref: '#/definitions/Artist'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Artist not found  
+  '/album/newReleases/{country}':
+    get: 
+      tags:
+        - artist
+      summary: Get Releases from a country
+      description: ''
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: country
+          description: name of the country to search
+          required: true
+          type: string
+        - in: query
+          name: count
+          description: number of returned new releases
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Release'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Artist not found  
+          
+  '/playlist':
+    post:
+      tags:
+        - artist
+      summary: Create playlist by provided artists
+      description: ''
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: country
+          description: name of the country to search
+          required: true
+          type: string
+        - in: query
+          name: count
+          description: number of returned new songs in playlist
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+              $ref: '#/definitions/Track'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Artist not found  
+          
+definitions:
+  Artist:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+  Track:
+    type: object
+    properties:
+      id:
+        type: string
+      title: 
+        type: string
+      artist_name:
+        type: string
+  Release:
+    type: object
+    properties:
+      id:
+        type: string
+      title: 
+        type: string
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
