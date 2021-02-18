@@ -1,3 +1,7 @@
+# SpotifyWrapper - Service Oriented Architecture Assignment
+
+A spotify public web API wrapper implements both JAX-RS \& JAX-WS to recommend similar music playlist
+
 Import the Gradle project via `build.gradle` inside your preferred IDE.  
 IntelliJ: https://www.jetbrains.com/help/idea/2017.1/importing-a-gradle-project-or-a-gradle-module.html  
 Eclipse: http://www.vogella.com/tutorials/EclipseGradle/article.html
